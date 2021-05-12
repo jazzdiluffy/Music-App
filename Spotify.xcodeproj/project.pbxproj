@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4233F184264B051F0086CC0C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4233F183264B051F0086CC0C /* Extensions.swift */; };
+		4233F188264C26A00086CC0C /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4233F187264C269F0086CC0C /* AuthResponse.swift */; };
 		4267EF4C26486BE70001AB02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267EF4B26486BE70001AB02 /* AppDelegate.swift */; };
 		4267EF4E26486BE70001AB02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267EF4D26486BE70001AB02 /* SceneDelegate.swift */; };
 		4267EF5026486BE70001AB02 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267EF4F26486BE70001AB02 /* HomeViewController.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		4233F183264B051F0086CC0C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4233F187264C269F0086CC0C /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		4267EF4826486BE70001AB02 /* Spotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4267EF4B26486BE70001AB02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4267EF4D26486BE70001AB02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				42CFDD102649B1950013115D /* AudioTrack.swift */,
 				42CFDD132649B1CF0013115D /* Artist.swift */,
 				42CFDD162649B1D80013115D /* UserProfile.swift */,
+				4233F187264C269F0086CC0C /* AuthResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				42CFDCF92649ACDA0013115D /* ProfileViewController.swift in Sources */,
 				42CFDCE32649ABF90013115D /* TabBarViewController.swift in Sources */,
 				42CFDD0B2649B15C0013115D /* HapticsManager.swift in Sources */,
+				4233F188264C26A00086CC0C /* AuthResponse.swift in Sources */,
 				42CFDD112649B1950013115D /* AudioTrack.swift in Sources */,
 				4267EF5026486BE70001AB02 /* HomeViewController.swift in Sources */,
 				42CFDCEF2649AC980013115D /* AuthViewController.swift in Sources */,
