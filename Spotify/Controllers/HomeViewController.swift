@@ -20,11 +20,21 @@ class HomeViewController: UIViewController {
         title = "Home"
         view.backgroundColor = .systemIndigo
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
-       
-        // TODO: bad gradient in landscape mode
+        
         setupClearNavBar()
         setupGradient()
         
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradient?.frame = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: getNavBarHeightAndWidth(vc: self).width,
+            height: getNavBarHeightAndWidth(vc: self).height
+        )
         
     }
     
@@ -41,9 +51,16 @@ class HomeViewController: UIViewController {
         gradient.locations = [0.0 , 1.0]
         gradient.startPoint = CGPoint(x: 0.5, y: -0.8)
         gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
-        gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: height)
+        
+        let width = getNavBarHeightAndWidth(vc: self).width
+        
+        print(width)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: width, height: height)
+        
         return gradient
     }
+    
+    
     
     func setupClearNavBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -53,13 +70,8 @@ class HomeViewController: UIViewController {
     }
     
     func setupGradient() {
-        let height : CGFloat
-        if let navigationBar = navigationController?.navigationBar {
-            height = navigationBar.frame.size.height
-        } else {
-            height = 90
-        }
-        let color = UIColor.black.withAlphaComponent(0.5).cgColor // You can mess with opacity to your liking
+        let height = getNavBarHeightAndWidth(vc: self).height
+        let color = UIColor.black.withAlphaComponent(0.5).cgColor 
         let clear = UIColor.black.withAlphaComponent(0.0).cgColor
         gradient = setupGradient(height: height, topColor: color, bottomColor: clear)
         view.addSubview(gradientView)
