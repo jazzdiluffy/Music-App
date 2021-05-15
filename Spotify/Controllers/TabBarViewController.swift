@@ -28,6 +28,11 @@ class TabBarViewController: UITabBarController {
         let nav2 = UINavigationController(rootViewController: vc2)
         let nav3 = UINavigationController(rootViewController: vc3)
         
+        
+        nav1.navigationBar.tintColor = .label
+        nav2.navigationBar.tintColor = .label
+        nav3.navigationBar.tintColor = .label
+        
         nav1.tabBarItem = UITabBarItem(title: "Home",
                                        image: UIImage(systemName: "house"),
                                        tag: 1
@@ -40,6 +45,11 @@ class TabBarViewController: UITabBarController {
                                        image: UIImage(systemName: "books.vertical"),
                                        tag: 3
         )
+        
+        tabBar.tintColor = .label
+        tabBar.layer.masksToBounds = true
+        tabBar.layer.cornerRadius = 15
+        
         
         nav1.navigationBar.prefersLargeTitles = true
         nav2.navigationBar.prefersLargeTitles = true
