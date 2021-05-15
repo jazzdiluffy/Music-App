@@ -22,8 +22,8 @@ class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
        
         // TODO: bad gradient in landscape mode
-//        setupClearNavBar()
-//        setupGradient()
+        setupClearNavBar()
+        setupGradient()
         
         
     }
@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [topColor, bottomColor]
         gradient.locations = [0.0 , 1.0]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.startPoint = CGPoint(x: 0.5, y: -0.8)
         gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: height)
         return gradient
@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
         }
         let color = UIColor.black.withAlphaComponent(0.5).cgColor // You can mess with opacity to your liking
         let clear = UIColor.black.withAlphaComponent(0.0).cgColor
-        gradient = setupGradient(height: height, topColor: clear, bottomColor: color)
+        gradient = setupGradient(height: height, topColor: color, bottomColor: clear)
         view.addSubview(gradientView)
         NSLayoutConstraint.activate([
             gradientView.topAnchor.constraint(equalTo: view.topAnchor),
