@@ -19,16 +19,3 @@ public func getImageFrom(gradientLayer:CAGradientLayer) -> UIImage? {
     return gradientImage
 }
 
-public func getNavBarHeightAndWidth(vc: UIViewController) -> (height: CGFloat, width: CGFloat) {
-    var width: CGFloat
-    var height: CGFloat
-    if let navigationBar = vc.navigationController?.navigationBar {
-        height = navigationBar.frame.size.height
-        width = navigationBar.frame.size.width
-    } else {
-        width = 414
-        height = 90
-    }
-    
-    return (height, width)
-}
