@@ -20,7 +20,6 @@ class SearchViewController: UIViewController {
         view.backgroundColor = .systemGreen
         title = "Search"
         
-        setupClearNavBar()
         setupGradient(gradient: &gradient, gradientView: gradientView)
     }
     

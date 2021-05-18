@@ -36,7 +36,6 @@ extension UIView {
 
 extension UIViewController {
     public func setupGradient(gradient: inout CAGradientLayer?, gradientView: UIView) {
-        
         let height = getNavBarHeightAndWidth().height
         let color = UIColor.black.withAlphaComponent(0.5).cgColor
         let clear = UIColor.black.withAlphaComponent(0.0).cgColor
@@ -49,23 +48,13 @@ extension UIViewController {
         gradientView.layer.insertSublayer(gradient!, at: 0)
     }
     
-    public func setupClearNavBar() {
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.barTintColor = .clear
-        navigationController?.navigationBar.isTranslucent = true
-    }
-    
     public func setupGradient(height: CGFloat, topColor: CGColor, bottomColor: CGColor) ->  CAGradientLayer {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [topColor, bottomColor]
         gradient.locations = [0.0 , 1.0]
         gradient.startPoint = CGPoint(x: 0.5, y: -0.8)
         gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
-        
         let width = getNavBarHeightAndWidth().width
-        
-        print(width)
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: width, height: height)
         
         return gradient

@@ -9,6 +9,20 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    private var collectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
+            HomeViewController.createSectionLayout(section: sectionIndex)
+        })
+    
+    private let spinner : UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.tintColor = .label
+        spinner.hidesWhenStopped = true
+        return spinner
+    }()
+    
+    
     var gradient : CAGradientLayer?
     let gradientView : UIView = {
         let view = UIView()
@@ -20,42 +34,69 @@ class HomeViewController: UIViewController {
         title = "Home"
         view.backgroundColor = .systemGreen
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
-        
-        setupClearNavBar()
+        configureCollectionView()
         setupGradient(gradient: &gradient, gradientView: gradientView)
-        
+        view.addSubview(spinner)
         fetchData()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        collectionView.frame = view.bounds
+
         gradient?.frame = CGRect(
             x: 0.0,
             y: 0.0,
             width: getNavBarHeightAndWidth().width,
             height: getNavBarHeightAndWidth().height
         )
+    }
+    
+    private func configureCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .clear
+    }
+    
+    private static func createSectionLayout(section: Int) -> NSCollectionLayoutSection {
+        // Item
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                                             heightDimension: .fractionalHeight(1.0))
+        )
+        item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
+        // Group
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(120)),
+            subitem: item,
+            count: 1
+        )
         
+        // Section
+        let section = NSCollectionLayoutSection(group: group)
+        return section
     }
     
     private func fetchData() {
-//        APICaller.shared.getNewReleases { result in
-//            switch result {
-//            case .success(let model):
-//                break
-//            case .failure(let error):
-//                break
-//            }
-//        }
+        //        APICaller.shared.getNewReleases { result in
+        //            switch result {
+        //            case .success(let model):
+        //                break
+        //            case .failure(let error):
+        //                break
+        //            }
+        //        }
         
-//        APICaller.shared.getFeaturedPlaylists { result in
-//            switch result {
-//            case .success(let model):
-//                break
-//            case .failure(let error):
-//                break
-//            }
-//        }
+        //        APICaller.shared.getFeaturedPlaylists { result in
+        //            switch result {
+        //            case .success(let model):
+        //                break
+        //            case .failure(let error):
+        //                break
+        //            }
+        //        }
         
         
         APICaller.shared.getRecommendedGenres { result in
@@ -87,5 +128,23 @@ class HomeViewController: UIViewController {
     
 }
 
-
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    // Data Source
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .orange
+        cell.layer.cornerRadius = 8
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.label.cgColor
+        return cell
+    }
+    
+    
+    // Delegate
+    
+}
 

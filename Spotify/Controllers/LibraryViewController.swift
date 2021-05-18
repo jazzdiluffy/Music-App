@@ -20,7 +20,6 @@ class LibraryViewController: UIViewController {
         view.backgroundColor = .systemGreen
         title = "Library"
         
-        setupClearNavBar()
         setupGradient(gradient: &gradient, gradientView: gradientView)
     }
 
