@@ -48,9 +48,30 @@ class HomeViewController: UIViewController {
 //            }
 //        }
         
-        APICaller.shared.getFeaturedPlaylists { result in
+//        APICaller.shared.getFeaturedPlaylists { result in
+//            switch result {
+//            case .success(let model):
+//                break
+//            case .failure(let error):
+//                break
+//            }
+//        }
+        
+        
+        APICaller.shared.getRecommendedGenres { result in
             switch result {
             case .success(let model):
+                let genres = model.genres
+                var seeds = Set<String>()
+                while seeds.count < 5 {
+                    if let random = genres.randomElement() {
+                        seeds.insert(random)
+                    }
+                    
+                }
+                APICaller.shared.getRecommendations(genres: seeds) { _ in
+                    
+                }
                 break
             case .failure(let error):
                 break
