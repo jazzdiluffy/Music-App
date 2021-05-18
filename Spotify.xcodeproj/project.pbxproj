@@ -16,6 +16,9 @@
 		4267EF5526486BEB0001AB02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4267EF5426486BEB0001AB02 /* Assets.xcassets */; };
 		4267EF5826486BEB0001AB02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4267EF5626486BEB0001AB02 /* LaunchScreen.storyboard */; };
 		42BA8208264EE6350089FA62 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA8207264EE6350089FA62 /* SettingsModels.swift */; };
+		42C7E6B62653C56E0080D602 /* NewReleasesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7E6B52653C56E0080D602 /* NewReleasesResponse.swift */; };
+		42C7E6B92653C6CF0080D602 /* APIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7E6B82653C6CF0080D602 /* APIImage.swift */; };
+		42C7E6BC2653D3E80080D602 /* FeaturedPlaylistResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C7E6BB2653D3E80080D602 /* FeaturedPlaylistResponse.swift */; };
 		42CFDCE32649ABF90013115D /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CFDCE22649ABF90013115D /* TabBarViewController.swift */; };
 		42CFDCE72649AC3D0013115D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CFDCE62649AC3D0013115D /* SearchViewController.swift */; };
 		42CFDCEA2649AC5C0013115D /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CFDCE92649AC5C0013115D /* LibraryViewController.swift */; };
@@ -48,6 +51,9 @@
 		4267EF5726486BEB0001AB02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4267EF5926486BEB0001AB02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42BA8207264EE6350089FA62 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
+		42C7E6B52653C56E0080D602 /* NewReleasesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesResponse.swift; sourceTree = "<group>"; };
+		42C7E6B82653C6CF0080D602 /* APIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIImage.swift; sourceTree = "<group>"; };
+		42C7E6BB2653D3E80080D602 /* FeaturedPlaylistResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistResponse.swift; sourceTree = "<group>"; };
 		42CFDCE22649ABF90013115D /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		42CFDCE62649AC3D0013115D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		42CFDCE92649AC5C0013115D /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +155,9 @@
 				42CFDD162649B1D80013115D /* UserProfile.swift */,
 				4233F187264C269F0086CC0C /* AuthResponse.swift */,
 				42BA8207264EE6350089FA62 /* SettingsModels.swift */,
+				42C7E6B52653C56E0080D602 /* NewReleasesResponse.swift */,
+				42C7E6B82653C6CF0080D602 /* APIImage.swift */,
+				42C7E6BB2653D3E80080D602 /* FeaturedPlaylistResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +344,7 @@
 				42CFDCF32649ACA30013115D /* WelcomeViewController.swift in Sources */,
 				42CFDCF92649ACDA0013115D /* ProfileViewController.swift in Sources */,
 				42CFDCE32649ABF90013115D /* TabBarViewController.swift in Sources */,
+				42C7E6B62653C56E0080D602 /* NewReleasesResponse.swift in Sources */,
 				42CFDD0B2649B15C0013115D /* HapticsManager.swift in Sources */,
 				4233F188264C26A00086CC0C /* AuthResponse.swift in Sources */,
 				42CFDD112649B1950013115D /* AudioTrack.swift in Sources */,
@@ -345,10 +355,12 @@
 				42CFDD172649B1D80013115D /* UserProfile.swift in Sources */,
 				4233F184264B051F0086CC0C /* Extensions.swift in Sources */,
 				42CFDCEA2649AC5C0013115D /* LibraryViewController.swift in Sources */,
+				42C7E6B92653C6CF0080D602 /* APIImage.swift in Sources */,
 				42CFDD142649B1CF0013115D /* Artist.swift in Sources */,
 				42BA8208264EE6350089FA62 /* SettingsModels.swift in Sources */,
 				42CFDCFF2649AD030013115D /* PlaylistViewController.swift in Sources */,
 				4267EF4E26486BE70001AB02 /* SceneDelegate.swift in Sources */,
+				42C7E6BC2653D3E80080D602 /* FeaturedPlaylistResponse.swift in Sources */,
 				42CFDCFC2649ACEF0013115D /* PlayerViewController.swift in Sources */,
 				42CFDD082649B1390013115D /* APICaller.swift in Sources */,
 				42CFDCF62649ACC10013115D /* SettingsViewController.swift in Sources */,

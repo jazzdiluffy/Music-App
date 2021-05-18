@@ -14,7 +14,6 @@ struct Section {
     
 }
 
-
 struct Option {
     let title: String
     let handler: () -> Void
