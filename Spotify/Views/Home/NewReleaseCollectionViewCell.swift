@@ -23,21 +23,25 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     private let albumNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .semibold)
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private let numberOfTracksLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .light)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         return label
     }()
     
     private let artistNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .regular)
-        label.numberOfLines = 0
+        label.numberOfLines = 1
+        label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -47,8 +51,8 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .secondarySystemBackground
         contentView.addSubview(albumCoverImageView)
         contentView.addSubview(albumNameLabel)
-        contentView.addSubview(numberOfTracksLabel)
         contentView.addSubview(artistNameLabel)
+        contentView.addSubview(numberOfTracksLabel)
         contentView.layer.cornerRadius = 6
         
     }
@@ -63,8 +67,10 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         artistNameLabel.sizeToFit()
         numberOfTracksLabel.sizeToFit()
         
-        let imageSize: CGFloat = contentView.height - 10
-        albumCoverImageView.frame = CGRect(x: 5, y: 5, width: imageSize, height: imageSize)
+//        let imageSize: CGFloat = contentView.height - 10
+//        albumCoverImageView.frame = CGRect(x: 5, y: 5, width: imageSize, height: imageSize)
+        setConstraints()
+        
     }
     
     override func prepareForReuse() {
@@ -81,6 +87,31 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         artistNameLabel.text = viewModel.artistName
         numberOfTracksLabel.text = "Tracks: \(viewModel.numberOfTracks)"
         albumCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
+        
+    }
+    
+    private func setConstraints() {
+        albumCoverImageView.translatesAutoresizingMaskIntoConstraints = false
+        albumCoverImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
+        albumCoverImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        let imageSize = contentView.height - 10
+        albumCoverImageView.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
+        albumCoverImageView.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
+        
+        albumNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        albumNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        albumNameLabel.leftAnchor.constraint(equalTo: albumCoverImageView.rightAnchor, constant: 10).isActive = true
+        albumNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 20).isActive = true
+        
+        artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        artistNameLabel.leftAnchor.constraint(equalTo: albumCoverImageView.rightAnchor, constant: 10).isActive = true
+        artistNameLabel.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 5).isActive = true
+        artistNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 20).isActive = true
+        
+        numberOfTracksLabel.translatesAutoresizingMaskIntoConstraints = false
+        numberOfTracksLabel.leftAnchor.constraint(equalTo: albumCoverImageView.rightAnchor, constant: 10).isActive = true
+        numberOfTracksLabel.topAnchor.constraint(equalTo: artistNameLabel.bottomAnchor, constant: 5).isActive = true
+        numberOfTracksLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 20).isActive = true
         
     }
 }
