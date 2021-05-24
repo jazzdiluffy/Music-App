@@ -24,7 +24,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .semibold)
         label.numberOfLines = 2
-        label.minimumScaleFactor = 0.5
+        label.minimumScaleFactor = 0.7
         label.adjustsFontSizeToFitWidth = true
         return label
     }()

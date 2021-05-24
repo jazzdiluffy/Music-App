@@ -21,6 +21,17 @@ final class APICaller {
         case failedToGetData
     }
     
+    // MARK: -Albums
+    
+    public func getAlbumsDetails(for album: Album, completion: @escaping (Result<String, Error>) -> Void) {
+        createRequest(with: URL(string: Constants.baseAPIURL + ""), type: .GET) { request in
+        }
+    }
+    
+    // MARK: -Playlists
+    
+    // MARK: -Profile
+    
     public func getCurrentUserProfile(completion: @escaping (Result<UserProfile, Error>) -> Void) {
         createRequest(
             with: URL(string: Constants.baseAPIURL + "/me"),
@@ -42,6 +53,8 @@ final class APICaller {
             task.resume()
         }
     }
+    
+    // MARK: -Browse
     
     public func getNewReleases(completion: @escaping ((Result<NewReleasesResponse, Error>)) -> Void) {
         createRequest(with: URL(string: Constants.baseAPIURL + "/browse/new-releases?limit=50"), type: .GET) { request in
@@ -84,7 +97,7 @@ final class APICaller {
     
     public func getRecommendations(genres:Set<String>, completion: @escaping (Result<RecommendationsResponse, Error>) -> Void) {
         let seeds = genres.joined(separator: ",")
-        createRequest(with: URL(string: Constants.baseAPIURL + "/recommendations?limit=30&seed_genres=\(seeds)"), type: .GET) { request in
+        createRequest(with: URL(string: Constants.baseAPIURL + "/recommendations?limit=20&seed_genres=\(seeds)"), type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.failedToGetData))

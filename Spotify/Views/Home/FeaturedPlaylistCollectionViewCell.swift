@@ -24,7 +24,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 22, weight: .semibold)
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.minimumScaleFactor = 0.4
+        label.minimumScaleFactor = 0.7
         label.adjustsFontSizeToFitWidth = true
         return label
     }()

@@ -17,6 +17,7 @@
 		4267EF5026486BE70001AB02 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267EF4F26486BE70001AB02 /* HomeViewController.swift */; };
 		4267EF5526486BEB0001AB02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4267EF5426486BEB0001AB02 /* Assets.xcassets */; };
 		4267EF5826486BEB0001AB02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4267EF5626486BEB0001AB02 /* LaunchScreen.storyboard */; };
+		42881C0C265C198500967F87 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42881C0B265C198500967F87 /* AlbumViewController.swift */; };
 		428B1D5726553FE4006BCDA7 /* NewReleasesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428B1D5626553FE4006BCDA7 /* NewReleasesCellViewModel.swift */; };
 		428B1D5A265549AE006BCDA7 /* FeaturedPlaylistCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428B1D59265549AE006BCDA7 /* FeaturedPlaylistCellViewModel.swift */; };
 		428B1D5D265549D8006BCDA7 /* RecommendedTracksCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428B1D5C265549D8006BCDA7 /* RecommendedTracksCellViewModel.swift */; };
@@ -60,6 +61,7 @@
 		4267EF5426486BEB0001AB02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4267EF5726486BEB0001AB02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4267EF5926486BEB0001AB02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42881C0B265C198500967F87 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		428B1D5626553FE4006BCDA7 /* NewReleasesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesCellViewModel.swift; sourceTree = "<group>"; };
 		428B1D59265549AE006BCDA7 /* FeaturedPlaylistCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistCellViewModel.swift; sourceTree = "<group>"; };
 		428B1D5C265549D8006BCDA7 /* RecommendedTracksCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedTracksCellViewModel.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				42CFDCFB2649ACEF0013115D /* PlayerViewController.swift */,
 				42CFDCFE2649AD030013115D /* PlaylistViewController.swift */,
 				42CFDD012649AD280013115D /* SearchResultsViewController.swift */,
+				42881C0B265C198500967F87 /* AlbumViewController.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				42CFDCF32649ACA30013115D /* WelcomeViewController.swift in Sources */,
 				42CFDCF92649ACDA0013115D /* ProfileViewController.swift in Sources */,
 				42CFDCE32649ABF90013115D /* TabBarViewController.swift in Sources */,
+				42881C0C265C198500967F87 /* AlbumViewController.swift in Sources */,
 				42C7E6B62653C56E0080D602 /* NewReleasesResponse.swift in Sources */,
 				42CFDD0B2649B15C0013115D /* HapticsManager.swift in Sources */,
 				4233F188264C26A00086CC0C /* AuthResponse.swift in Sources */,
