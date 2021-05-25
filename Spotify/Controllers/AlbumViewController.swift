@@ -23,6 +23,15 @@ class AlbumViewController: UIViewController {
         super.viewDidLoad()
         title = album.name
         view.backgroundColor = .systemGreen
+        
+        APICaller.shared.getAlbumsDetails(for: album) { result in
+            switch result {
+            case .success(let model):
+                break
+            case .failure(let error):
+                break
+            }
+        }
     }
 
 
