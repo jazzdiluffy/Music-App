@@ -25,7 +25,7 @@ class TabBarViewController: UITabBarController {
         vc3.navigationItem.largeTitleDisplayMode = .always
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .systemBackground
+        appearance.backgroundColor = .secondarySystemBackground
         
         let nav1 = UINavigationController(rootViewController: vc1)
         nav1.navigationBar.compactAppearance = appearance
@@ -57,6 +57,8 @@ class TabBarViewController: UITabBarController {
         tabBar.tintColor = .label
         tabBar.layer.masksToBounds = true
         tabBar.layer.cornerRadius = 15
+        tabBar.layer.borderWidth = 0.5
+        tabBar.layer.borderColor = UIColor.secondaryLabel.cgColor
         
         
         nav1.navigationBar.prefersLargeTitles = true

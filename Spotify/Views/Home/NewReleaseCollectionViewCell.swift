@@ -48,12 +48,11 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .secondarySystemBackground
+        contentView.backgroundColor = .secondarySystemFill
         contentView.addSubview(albumCoverImageView)
         contentView.addSubview(albumNameLabel)
         contentView.addSubview(artistNameLabel)
         contentView.addSubview(numberOfTracksLabel)
-        contentView.layer.cornerRadius = 6
         
     }
     

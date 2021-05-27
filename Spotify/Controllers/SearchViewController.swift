@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .systemBackground
         title = "Search"
         
         setupGradient(gradient: &gradient, gradientView: gradientView)

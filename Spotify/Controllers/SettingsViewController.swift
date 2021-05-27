@@ -22,7 +22,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         configureModels()
         title = "Settings"
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self

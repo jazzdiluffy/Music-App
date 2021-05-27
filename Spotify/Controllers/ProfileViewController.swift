@@ -26,6 +26,7 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         view.backgroundColor = .systemBackground
+        tableView.backgroundColor = .clear
         fetchProfile()
         
     }

@@ -43,11 +43,10 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .secondarySystemBackground
+        contentView.backgroundColor = .secondarySystemFill
         contentView.addSubview(trackCoverImageView)
         contentView.addSubview(trackNameLabel)
         contentView.addSubview(creatorNameLabel)
-        contentView.layer.cornerRadius = 6
         
     }
     
@@ -68,7 +67,7 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         trackNameLabel.text = nil
         creatorNameLabel.text = nil
-         trackCoverImageView.image = nil
+        trackCoverImageView.image = nil
         
     }
     
