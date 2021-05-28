@@ -21,7 +21,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Spotify"
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGreen
         view.addSubview(signInButton)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
     }

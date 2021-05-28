@@ -21,7 +21,7 @@ extension UIView {
     }
     
     var rigth: CGFloat {
-        return left + width
+        return frame.maxX
     }
     
     var top: CGFloat {
@@ -29,7 +29,7 @@ extension UIView {
     }
     
     var bottom: CGFloat {
-        return top + height
+        return frame.maxY
     }
 }
 
@@ -92,3 +92,11 @@ extension UIImage {
     }
 }
 
+
+extension UIColor {
+    func isLight() -> Bool {
+        guard let components = cgColor.components, components.count > 2 else {return false}
+        let brightness = ((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000
+        return (brightness > 0.5)
+    }
+}

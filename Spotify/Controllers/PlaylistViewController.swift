@@ -34,7 +34,7 @@ class PlaylistViewController: UIViewController {
                 NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1.0),
-                        heightDimension: .fractionalWidth(1.0)
+                        heightDimension: .fractionalWidth(1.2) 
                     ),
                     elementKind: UICollectionView.elementKindSectionHeader,
                     alignment: .top
@@ -86,13 +86,29 @@ class PlaylistViewController: UIViewController {
                 }
             }
         }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(didTapShare)
+        )
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
     }
-
+    
+    @objc private func didTapShare() {
+        guard let url = URL(string: playlist.external_urls["spotify"] ?? "") else {
+            return
+        }
+        let vc = UIActivityViewController(
+            activityItems: [url],
+            applicationActivities: []
+        )
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true, completion: nil)
+    }
 }
 
 extension PlaylistViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -130,7 +146,8 @@ extension PlaylistViewController: UICollectionViewDataSource, UICollectionViewDe
             description: playlist.description,
             artworkURL: URL(string: playlist.images.first?.url ?? "")
         )
-         header.configure(with: headerViewModel)
+        header.configure(with: headerViewModel)
+        header.delegate = self
         return header
     }
 
@@ -140,4 +157,14 @@ extension PlaylistViewController: UICollectionViewDataSource, UICollectionViewDe
         collectionView.deselectItem(at: indexPath, animated: true)
         // Play this song
     }
+}
+
+
+extension PlaylistViewController: PlaylistHeaderCollectionReusableViewDelegate {
+    func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {
+        // Start playing all songs in queue order
+        print("🎧🎧🎧 ТЫ СЛЫШИШЬ МУЗЫКУ? А ОНА ИГРАЕТ!")
+    }
+    
+    
 }
