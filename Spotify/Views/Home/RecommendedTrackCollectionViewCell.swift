@@ -24,8 +24,6 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 22, weight: .semibold)
         label.numberOfLines = 1
         label.textAlignment = .left
-        label.minimumScaleFactor = 0.7
-        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -35,8 +33,6 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 14, weight: .thin)
         label.numberOfLines = 1
         label.textAlignment = .left
-        label.minimumScaleFactor = 0.5
-        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -86,13 +82,13 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         
         trackNameLabel.translatesAutoresizingMaskIntoConstraints = false
         trackNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        trackNameLabel.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 40).isActive = true
-        trackNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 60).isActive = true
+        trackNameLabel.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 20).isActive = true
+        trackNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 30).isActive = true
         
         creatorNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        creatorNameLabel.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 40).isActive = true
+        creatorNameLabel.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 20).isActive = true
         creatorNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 10).isActive = true
-        creatorNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 60).isActive = true
+        creatorNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 30).isActive = true
     }
     
 }
