@@ -9,6 +9,36 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    let searchController: UISearchController = {
+        let vc = UISearchController(searchResultsController: SearchResultsViewController())
+        vc.searchBar.placeholder = "Songs, Artists, Albums..."
+        vc.searchBar.searchBarStyle = .minimal
+        vc.definesPresentationContext = true
+        return vc
+    }()
+    
+    private let collectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
+            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1.0))
+            )
+            
+            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 3, bottom: 2, trailing: 3)
+            
+            let group = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120)),
+                subitem: item,
+                count: 2
+            )
+            group.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5)
+            let section = NSCollectionLayoutSection(group: group)
+            
+            return section
+        })
+    )
+    
     var gradient : CAGradientLayer?
     let gradientView : UIView = {
         let view = UIView()
@@ -19,7 +49,13 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Search"
-        
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
+        view.addSubview(collectionView)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .systemBackground
         setupGradient(gradient: &gradient, gradientView: gradientView)
     }
     
@@ -31,6 +67,39 @@ class SearchViewController: UIViewController {
             width: getNavBarHeightAndWidth().width,
             height: getNavBarHeightAndWidth().height
         )
+        collectionView.frame = view.bounds
     }
 
+}
+
+
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let resultsController = searchController.searchResultsController as? SearchResultsViewController,
+              let query = searchController.searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty else {
+            return
+        }
+        print(query)
+        // API Caller search
+    }
+    
+}
+
+
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .systemGreen
+        return cell
+    }
 }
