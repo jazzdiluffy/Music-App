@@ -5,13 +5,11 @@
 //  Created by Ilya Buldin on 14.05.2021.
 //
 
-import UIKit
-
+import Foundation
 
 struct Section {
     let title: String
     let options: [Option]
-    
 }
 
 struct Option {

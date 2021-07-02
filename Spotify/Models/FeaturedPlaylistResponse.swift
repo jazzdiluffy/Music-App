@@ -5,7 +5,7 @@
 //  Created by Ilya Buldin on 18.05.2021.
 //
 
-import UIKit
+import Foundation
 
 struct FeaturedPlaylistResponse: Codable {
     let playlists: PlaylistResponse
@@ -14,7 +14,6 @@ struct FeaturedPlaylistResponse: Codable {
 struct PlaylistResponse: Codable {
     let items: [Playlist]
 }
-
 
 struct User: Codable {
     let display_name: String

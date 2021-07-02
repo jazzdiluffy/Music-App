@@ -8,6 +8,8 @@
 import UIKit
 
 class RecommendedTrackCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     static let identifier = "RecommendedTrackCollectionViewCell"
     
     private let trackCoverImageView: UIImageView = {
@@ -27,7 +29,6 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    
     private let creatorNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .thin)
@@ -37,26 +38,35 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     }()
     
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .secondarySystemFill
         contentView.addSubview(trackCoverImageView)
         contentView.addSubview(trackNameLabel)
         contentView.addSubview(creatorNameLabel)
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Methods
+    func configure(with viewModel: RecommendedTracksCellViewModel) {
+        trackNameLabel.text = viewModel.name
+        creatorNameLabel.text = viewModel.artistName
+        trackCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
+    }
+    
+    
+    // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
         trackCoverImageView.sizeToFit()
         trackNameLabel.sizeToFit()
         creatorNameLabel.sizeToFit()
         setConstraints()
-        
     }
     
     override func prepareForReuse() {
@@ -64,13 +74,6 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         trackNameLabel.text = nil
         creatorNameLabel.text = nil
         trackCoverImageView.image = nil
-        
-    }
-    
-    func configure(with viewModel: RecommendedTracksCellViewModel) {
-        trackNameLabel.text = viewModel.name
-        creatorNameLabel.text = viewModel.artistName
-        trackCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
     }
     
     private func setConstraints() {
@@ -90,5 +93,4 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         creatorNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 10).isActive = true
         creatorNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 30).isActive = true
     }
-    
 }

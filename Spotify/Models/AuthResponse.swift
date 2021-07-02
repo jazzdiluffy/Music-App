@@ -5,7 +5,7 @@
 //  Created by Ilya Buldin on 12.05.2021.
 //
 
-import UIKit
+import Foundation
 
 struct AuthResponse: Codable {
     let access_token: String

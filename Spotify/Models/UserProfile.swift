@@ -5,7 +5,7 @@
 //  Created by Ilya Buldin on 10.05.2021.
 //
 
-import UIKit
+import Foundation
 
 struct UserProfile: Codable {
     let country: String
@@ -16,7 +16,4 @@ struct UserProfile: Codable {
     let id: String
     let images: [APIImage]
     let product: String
-
 }
-
-

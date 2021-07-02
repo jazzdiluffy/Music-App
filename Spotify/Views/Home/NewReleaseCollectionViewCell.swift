@@ -9,6 +9,8 @@ import UIKit
 import SDWebImage
 
 class NewReleaseCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     static let identifier = "NewReleaseCollectionViewCell"
     
     private let albumCoverImageView: UIImageView = {
@@ -46,6 +48,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     }()
     
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .secondarySystemFill
@@ -53,20 +56,29 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(albumNameLabel)
         contentView.addSubview(artistNameLabel)
         contentView.addSubview(numberOfTracksLabel)
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Methods
+    func configure(with viewModel: NewReleasesCellViewModel) {
+        albumNameLabel.text = viewModel.name
+        artistNameLabel.text = viewModel.artistName
+        numberOfTracksLabel.text = "Tracks: \(viewModel.numberOfTracks)"
+        albumCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
+    }
+    
+    
+    // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
         albumNameLabel.sizeToFit()
         artistNameLabel.sizeToFit()
         numberOfTracksLabel.sizeToFit()
         setConstraints()
-        
     }
     
     override func prepareForReuse() {
@@ -75,17 +87,9 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         artistNameLabel.text = nil
         numberOfTracksLabel.text = nil
         albumCoverImageView.image = nil
-        
     }
     
-    func configure(with viewModel: NewReleasesCellViewModel) {
-        albumNameLabel.text = viewModel.name
-        artistNameLabel.text = viewModel.artistName
-        numberOfTracksLabel.text = "Tracks: \(viewModel.numberOfTracks)"
-        albumCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
-        
-    }
-    
+    // TODO: - Set Constrainsts using EasyPeasy
     private func setConstraints() {
         albumCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         albumCoverImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
@@ -108,6 +112,5 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         numberOfTracksLabel.leftAnchor.constraint(equalTo: albumCoverImageView.rightAnchor, constant: 10).isActive = true
         numberOfTracksLabel.topAnchor.constraint(equalTo: artistNameLabel.bottomAnchor, constant: 5).isActive = true
         numberOfTracksLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 20).isActive = true
-        
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 
 class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     static let identifier = "FeaturedPlaylistCollectionViewCell"
     
     private let playlistCoverImageView: UIImageView = {
@@ -29,7 +31,6 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    
     private let creatorNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .thin)
@@ -41,26 +42,35 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     }()
     
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .secondarySystemFill
         contentView.addSubview(playlistCoverImageView)
         contentView.addSubview(playlistNameLabel)
         contentView.addSubview(creatorNameLabel)
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Methods
+    func configure(with viewModel: FeaturedPlaylistCellViewModel) {
+        playlistNameLabel.text = viewModel.name
+        creatorNameLabel.text = "• \(viewModel.creatorName)"
+        playlistCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
+    }
+    
+    
+    // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
         playlistCoverImageView.sizeToFit()
         playlistNameLabel.sizeToFit()
         creatorNameLabel.sizeToFit()
         setConstraints()
-        
     }
     
     override func prepareForReuse() {
@@ -68,15 +78,9 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         playlistNameLabel.text = nil
         creatorNameLabel.text = nil
         playlistCoverImageView.image = nil
-        
     }
     
-    func configure(with viewModel: FeaturedPlaylistCellViewModel) {
-        playlistNameLabel.text = viewModel.name
-        creatorNameLabel.text = "• \(viewModel.creatorName)"
-        playlistCoverImageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
-    }
-    
+    // TODO: - Set constrainsts using EasyPeasy
     private func setConstraints() {
         playlistCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         playlistCoverImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true

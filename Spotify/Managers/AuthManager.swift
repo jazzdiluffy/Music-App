@@ -8,19 +8,11 @@
 import UIKit
 
 final class AuthManager {
+    
+    // MARK: - Properties
     static let shared = AuthManager()
     
     private var refreshingToken = false
-    
-    struct Constants {
-        static let clientID = "8dc5fe23fc764d8fb64da68e5b4b2c7e"
-        static let clientSecret = "90bbf0ee4761425fab89710818052eb1"
-        static let tokenAPIURL = "https://accounts.spotify.com/api/token"
-        static let redirectURI = "https://github.com/jazzdiluffy"
-        static let scopes = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email"
-    }
-    
-    private init() {}
     
     public var signInURL: URL? {
         let base = "https://accounts.spotify.com/authorize"
@@ -54,6 +46,22 @@ final class AuthManager {
         return currentDate.addingTimeInterval(fiveMinutes) >= expirationDate
     }
     
+    struct Constants {
+        static let clientID = "8dc5fe23fc764d8fb64da68e5b4b2c7e"
+        static let clientSecret = "90bbf0ee4761425fab89710818052eb1"
+        static let tokenAPIURL = "https://accounts.spotify.com/api/token"
+        static let redirectURI = "https://github.com/jazzdiluffy"
+        static let scopes = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email"
+    }
+    
+    private var onRefreshBlocks = [(String) -> Void]()
+    
+    
+    // MARK: - Init
+    private init() {}
+    
+    
+    // MARK: - Methods
     public func exchangeCodeForToken(code: String,
                                      completion: @escaping ((Bool) -> Void)
     ) {
@@ -83,7 +91,6 @@ final class AuthManager {
         }
         request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
         
-        
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             guard let data = data, error == nil else {
                 completion(false)
@@ -100,14 +107,9 @@ final class AuthManager {
             }
         }
         task.resume()
-        
-
     }
     
-    private var onRefreshBlocks = [(String) -> Void]()
-    
-    
-    /// Supplies valid token to be used with API Calls
+    // Supplies valid token to be used with API Calls
     public func withValidToken(completion: @escaping (String) -> Void) {
         guard !refreshingToken else {
             // Append the completion
@@ -121,7 +123,6 @@ final class AuthManager {
                         completion(token)
                     }
                 }
-            
         } else if let token = accessToken {
             completion(token)
         }
@@ -138,6 +139,7 @@ final class AuthManager {
         guard let refreshToken = self.refreshToken else {
             return
         }
+        
         // Refresh the token
         guard let url = URL(string: Constants.tokenAPIURL) else {
             return
@@ -164,7 +166,6 @@ final class AuthManager {
             return
         }
         request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
-        
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             self?.refreshingToken = false
@@ -195,7 +196,6 @@ final class AuthManager {
         if let refresh_token = result.refresh_token {
             UserDefaults.standard.setValue(refresh_token, forKey: "refresh_token")
         }
-        
         UserDefaults.standard.setValue(Date().addingTimeInterval(TimeInterval(result.expires_in)), forKey: "expirationDate")
     }
 }

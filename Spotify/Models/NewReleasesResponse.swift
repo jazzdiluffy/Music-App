@@ -5,7 +5,7 @@
 //  Created by Ilya Buldin on 18.05.2021.
 //
 
-import UIKit
+import Foundation
 
 struct NewReleasesResponse: Codable {
     let albums: AlbumsResponse
