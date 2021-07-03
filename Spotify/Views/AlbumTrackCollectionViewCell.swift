@@ -9,6 +9,8 @@ import UIKit
 
 
 class AlbumTrackCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     static let identifier = "AlbumTrackCollectionViewCell"
     
     private let trackNameLabel: UILabel = {
@@ -18,7 +20,6 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .left
         return label
     }()
-    
     
     private let creatorNameLabel: UILabel = {
         let label = UILabel()
@@ -31,22 +32,29 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell {
     }()
     
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .secondarySystemFill
         contentView.addSubview(trackNameLabel)
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Methods
+    func configure(with viewModel: AlbumCollectionViewCellViewModel) {
+        trackNameLabel.text = viewModel.name
+    }
+    
+    
+    // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
         trackNameLabel.sizeToFit()
         setConstraints()
-        
     }
     
     override func prepareForReuse() {
@@ -54,16 +62,12 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell {
         trackNameLabel.text = nil
     }
     
-    func configure(with viewModel: AlbumCollectionViewCellViewModel) {
-        trackNameLabel.text = viewModel.name
-    }
-    
+    // TODO: - Set constrainsts using EasyPeasy
     private func setConstraints() {
         trackNameLabel.translatesAutoresizingMaskIntoConstraints = false
         trackNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
         trackNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         trackNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - 30).isActive = true
     }
-    
 }
 

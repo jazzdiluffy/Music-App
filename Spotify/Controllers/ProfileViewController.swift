@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    // MARK: - Properties
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -19,6 +20,8 @@ class ProfileViewController: UIViewController {
 
     private var models: [String] = []
     
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Profile"
@@ -28,15 +31,17 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         tableView.backgroundColor = .clear
         fetchProfile()
-        
     }
     
     
+    // MARK: - Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
     
+    
+    // MARK: - Methods
     private func fetchProfile() {
         APICaller.shared.getCurrentUserProfile { [weak self] result in
             DispatchQueue.main.async {
@@ -67,7 +72,6 @@ class ProfileViewController: UIViewController {
             return
         }
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width / 1.5))
-        
         let imageSize: CGFloat = headerView.height / 2
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
         headerView.addSubview(imageView)
@@ -76,10 +80,7 @@ class ProfileViewController: UIViewController {
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = imageSize / 2
         imageView.sd_setImage(with: url, completed: nil)
-        
-        
         tableView.tableHeaderView = headerView
-        
     }
 
     private func failedToGetProfile() {
@@ -93,9 +94,10 @@ class ProfileViewController: UIViewController {
 }
 
 
+// MARK: - Delegate and DataSource
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
-    // MARK: -DataSource
+    // DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
     }
@@ -105,10 +107,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         cell.textLabel?.text = models[indexPath.row]
         return cell
-        
     }
     
     
-    // MARK: -Delegate
-    
+    // Delegate
 }

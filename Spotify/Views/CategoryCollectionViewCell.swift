@@ -9,6 +9,8 @@ import UIKit
 import SDWebImage
 
 class CategoryCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
     static let identifier = "CategoryCollectionViewCell"
     
     private let colors: [UIColor] = [
@@ -38,6 +40,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.layer.masksToBounds = true
@@ -50,6 +54,16 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Methods
+    func configure(with viewModel: CategoryCollectionViewCellViewModel) {
+        label.text = viewModel.title
+        imageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
+        contentView.backgroundColor = colors.randomElement()
+    }
+    
+    
+    // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
         setConstraints()
@@ -59,15 +73,13 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         label.text = nil
-        imageView.image = UIImage(systemName: "music.quarternote.3", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .regular))
+        imageView.image = UIImage(
+            systemName: "music.quarternote.3",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .regular)
+        )
     }
     
-    func configure(with viewModel: CategoryCollectionViewCellViewModel) {
-        label.text = viewModel.title
-        imageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
-        contentView.backgroundColor = colors.randomElement()
-    }
-    
+    // TODO: Set constrainsts using EasyPeasy
     private func setConstraints() {
         let imageSize = height / 1.5
         imageView.translatesAutoresizingMaskIntoConstraints = false

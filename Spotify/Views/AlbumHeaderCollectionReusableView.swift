@@ -12,7 +12,10 @@ protocol AlbumCollectionReusableViewDelegate: AnyObject {
     func albumCollectionReusableViewPlayAll(_ header: AlbumHeaderCollectionReusableView)
 }
 
+
 final class AlbumHeaderCollectionReusableView: UICollectionReusableView {
+    
+    // MARK: - Properties
     static let identifier = "AlbumHeaderCollectionReusableView"
     
     weak var delegate: AlbumCollectionReusableViewDelegate?
@@ -70,33 +73,8 @@ final class AlbumHeaderCollectionReusableView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let imageSize: CGFloat = width / 1.3
-        imageView.frame = CGRect(
-            x: (width - imageSize) / 2,
-            y: 40,
-            width: imageSize,
-            height: imageSize
-        )
-        
-        nameLabel.frame = CGRect(
-            x: 15,
-            y: imageView.bottom + 40,
-            width: width - 20,
-            height: 32
-        )
-        descriptionLabel.frame = CGRect(
-            x: 15,
-            y: nameLabel.bottom,
-            width: width - 80,
-            height: 80
-        )
-        descriptionLabel.sizeToFit()
-        
-        playAllButton.frame = CGRect(x: width - 70, y: imageView.bottom + 40, width: 60, height: 60)
-    }
     
+    // MARK: - Methods
     func configure(with viewModel: AlbumHeaderCollectionReusableViewViewModel) {
         nameLabel.text = viewModel.name
         descriptionLabel.text = viewModel.description
@@ -119,4 +97,30 @@ final class AlbumHeaderCollectionReusableView: UICollectionReusableView {
         delegate?.albumCollectionReusableViewPlayAll(self)
     }
     
+    
+    // MARK: - Layout
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let imageSize: CGFloat = width / 1.3
+        imageView.frame = CGRect(
+            x: (width - imageSize) / 2,
+            y: 40,
+            width: imageSize,
+            height: imageSize
+        )
+        nameLabel.frame = CGRect(
+            x: 15,
+            y: imageView.bottom + 40,
+            width: width - 20,
+            height: 32
+        )
+        descriptionLabel.frame = CGRect(
+            x: 15,
+            y: nameLabel.bottom,
+            width: width - 80,
+            height: 80
+        )
+        descriptionLabel.sizeToFit()
+        playAllButton.frame = CGRect(x: width - 70, y: imageView.bottom + 40, width: 60, height: 60)
+    }
 }

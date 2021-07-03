@@ -9,6 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    // MARK: - Properties
     private var categories = [Category]()
     
     let searchController: UISearchController = {
@@ -22,31 +23,38 @@ class SearchViewController: UIViewController {
     private let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0)
+                )
             )
-            
             item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
             
             let group = NSCollectionLayoutGroup.horizontal(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120)),
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .absolute(120)
+                ),
                 subitem: item,
                 count: 2
             )
             group.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5)
-            let section = NSCollectionLayoutSection(group: group)
             
+            let section = NSCollectionLayoutSection(group: group)
             return section
         })
     )
     
     var gradient : CAGradientLayer?
+    
     let gradientView : UIView = {
         let view = UIView()
         return view
     }()
-
+    
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -73,6 +81,8 @@ class SearchViewController: UIViewController {
         }
     }
     
+    
+    // MARK: - Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradient?.frame = CGRect(
@@ -83,11 +93,10 @@ class SearchViewController: UIViewController {
         )
         collectionView.frame = view.bounds
     }
-
 }
 
 
-
+// MARK: Search Results Updating
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let resultsController = searchController.searchResultsController as? SearchResultsViewController,
@@ -98,10 +107,10 @@ extension SearchViewController: UISearchResultsUpdating {
         print(query)
         // API Caller search
     }
-    
 }
 
 
+// MARK: - Delegate and DataSource
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -112,14 +121,25 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as? CategoryCollectionViewCell else {
-            return UICollectionViewCell()
-        }
+        guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CategoryCollectionViewCell.identifier,
+                for: indexPath
+        ) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
         let category = categories[indexPath.row]
-        cell.configure(with: CategoryCollectionViewCellViewModel(
-            title: category.name,
-            artworkURL: URL(string: category.icons.first?.url ?? ""))
+        cell.configure(
+            with: CategoryCollectionViewCellViewModel(
+                title: category.name,
+                artworkURL: URL(string: category.icons.first?.url ?? "")
+            )
         )
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let category = categories[indexPath.row]
+        let vc = CategoryViewController(category: category)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

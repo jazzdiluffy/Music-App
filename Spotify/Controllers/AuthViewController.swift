@@ -11,6 +11,7 @@ import WebKit
 
 class AuthViewController: UIViewController {
     
+    // MARK: - Properties
     private let webView: WKWebView = {
         let prefs = WKWebpagePreferences()
         prefs.allowsContentJavaScript = true
@@ -19,12 +20,13 @@ class AuthViewController: UIViewController {
         let webView = WKWebView(frame: .zero,
                                 configuration: config
         )
-        
         return webView
     }()
     
     public var completionHandler: ((Bool) -> Void)?
-
+    
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Sign In"
@@ -37,14 +39,16 @@ class AuthViewController: UIViewController {
         webView.load(URLRequest(url: url))
     }
     
+    
+    // MARK: - Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         webView.frame = view.bounds
     }
-
 }
 
 
+// MARK: - Delegate
 extension AuthViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         guard let url = webView.url else {
@@ -58,11 +62,14 @@ extension AuthViewController: WKNavigationDelegate {
         webView.isHidden = true
         print("Code = \(code)")
         
-        AuthManager.shared.exchangeCodeForToken(code: code, completion: { [weak self] success in
-            DispatchQueue.main.async {
-                self?.navigationController?.popToRootViewController(animated: true)
-                self?.completionHandler?(success)
+        AuthManager.shared.exchangeCodeForToken(
+            code: code,
+            completion: { [weak self] success in
+                DispatchQueue.main.async {
+                    self?.navigationController?.popToRootViewController(animated: true)
+                    self?.completionHandler?(success)
+                }
             }
-        })
+        )
     }
 }

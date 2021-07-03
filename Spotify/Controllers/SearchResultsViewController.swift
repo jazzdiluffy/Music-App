@@ -13,5 +13,4 @@ class SearchResultsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     }
-
 }

@@ -9,20 +9,25 @@ import UIKit
 
 class AlbumViewController: UIViewController {
     
+    // MARK: - Properties
     private let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
             // Item
-            let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-                                                widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0)
+                )
             )
             item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
             
             //  Group
             let group = NSCollectionLayoutGroup.vertical(
-                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: .absolute(60)),
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .absolute(60)
+                ),
                 subitem: item,
                 count: 1
             )
@@ -46,6 +51,8 @@ class AlbumViewController: UIViewController {
     
     private let album: Album
     
+    
+    // MARK: - Init
     init(album: Album) {
         self.album = album
         super.init(nibName: nil, bundle: nil)
@@ -55,14 +62,18 @@ class AlbumViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = album.name
         view.backgroundColor = .systemBackground
-        
         view.addSubview(collectionView)
         collectionView.backgroundColor = .clear
-        collectionView.register(AlbumTrackCollectionViewCell.self, forCellWithReuseIdentifier: AlbumTrackCollectionViewCell.identifier)
+        collectionView.register(
+            AlbumTrackCollectionViewCell.self,
+            forCellWithReuseIdentifier: AlbumTrackCollectionViewCell.identifier
+        )
         collectionView.register(
             AlbumHeaderCollectionReusableView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -85,11 +96,12 @@ class AlbumViewController: UIViewController {
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                
             }
         }
     }
     
+    
+    // MARK: - Layout
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
@@ -97,6 +109,7 @@ class AlbumViewController: UIViewController {
 }
 
 
+// MARK: - Delegate and DataSource
 extension AlbumViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     // Data Source
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -138,7 +151,6 @@ extension AlbumViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     // Delegate
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         // Play this song

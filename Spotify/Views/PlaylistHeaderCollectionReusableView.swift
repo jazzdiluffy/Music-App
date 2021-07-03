@@ -12,7 +12,10 @@ protocol PlaylistHeaderCollectionReusableViewDelegate: AnyObject {
     func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView)
 }
 
+
 final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
+    
+    // MARK: - Properties
     static let identifier = "PlaylistHeaderCollectionReusableView"
     
     weak var delegate: PlaylistHeaderCollectionReusableViewDelegate?
@@ -46,7 +49,10 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     private let playAllButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGreen
-        let image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 33, weight: .regular))
+        let image = UIImage(
+            systemName: "play.fill",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 33, weight: .regular)
+        )
         button.setImage(image, for: .normal)
         button.tintColor = .white
         button.layer.masksToBounds = true
@@ -70,31 +76,10 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let imageSize: CGFloat = width / 1.3
-        imageView.frame = CGRect(
-            x: (width - imageSize) / 2,
-            y: 40,
-            width: imageSize,
-            height: imageSize
-        )
-        
-        nameLabel.frame = CGRect(
-            x: 15,
-            y: imageView.bottom + 3,
-            width: width - 20,
-            height: 32
-        )
-        descriptionLabel.frame = CGRect(
-            x: 15,
-            y: nameLabel.bottom,
-            width: width - 80,
-            height: 80
-        )
-        descriptionLabel.sizeToFit()
-        
-        playAllButton.frame = CGRect(x: width - 70, y: height - 70, width: 60, height: 60)
+    
+    // MARK: - Methods
+    @objc func didTapPlayAll() {
+        delegate?.playlistHeaderCollectionReusableViewDidTapPlayAll(self)
     }
     
     func configure(with viewModel: PlaylistHeaderReusableViewViewModel) {
@@ -115,8 +100,30 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         }
     }
     
-    @objc func didTapPlayAll() {
-        delegate?.playlistHeaderCollectionReusableViewDidTapPlayAll(self)
-    }
     
+    // MARK: - Layout
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let imageSize: CGFloat = width / 1.3
+        imageView.frame = CGRect(
+            x: (width - imageSize) / 2,
+            y: 40,
+            width: imageSize,
+            height: imageSize
+        )
+        nameLabel.frame = CGRect(
+            x: 15,
+            y: imageView.bottom + 3,
+            width: width - 20,
+            height: 32
+        )
+        descriptionLabel.frame = CGRect(
+            x: 15,
+            y: nameLabel.bottom,
+            width: width - 80,
+            height: 80
+        )
+        descriptionLabel.sizeToFit()
+        playAllButton.frame = CGRect(x: width - 70, y: height - 70, width: 60, height: 60)
+    }
 }

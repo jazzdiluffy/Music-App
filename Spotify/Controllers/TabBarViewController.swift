@@ -8,7 +8,8 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,5 +68,4 @@ class TabBarViewController: UITabBarController {
         
         setViewControllers([nav1, nav2, nav3], animated: false)
     }
-
 }
