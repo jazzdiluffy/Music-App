@@ -12,7 +12,6 @@ protocol AlbumCollectionReusableViewDelegate: AnyObject {
     func albumCollectionReusableViewPlayAll(_ header: AlbumHeaderCollectionReusableView)
 }
 
-
 final class AlbumHeaderCollectionReusableView: UICollectionReusableView {
     
     // MARK: - Properties
@@ -111,7 +110,7 @@ final class AlbumHeaderCollectionReusableView: UICollectionReusableView {
         nameLabel.frame = CGRect(
             x: 15,
             y: imageView.bottom + 40,
-            width: width - 20,
+            width: width - 100,
             height: 32
         )
         descriptionLabel.frame = CGRect(
