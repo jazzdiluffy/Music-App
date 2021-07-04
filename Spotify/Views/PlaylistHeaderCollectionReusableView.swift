@@ -113,14 +113,14 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         )
         nameLabel.frame = CGRect(
             x: 15,
-            y: imageView.bottom + 3,
+            y: imageView.bottom + 15,
             width: width - 20,
             height: 32
         )
         descriptionLabel.frame = CGRect(
             x: 15,
             y: nameLabel.bottom,
-            width: width - 80,
+            width: width - 90,
             height: 80
         )
         descriptionLabel.sizeToFit()

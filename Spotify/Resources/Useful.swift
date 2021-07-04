@@ -18,4 +18,4 @@ public func getImageFrom(gradientLayer:CAGradientLayer) -> UIImage? {
     UIGraphicsEndImageContext()
     return gradientImage
 }
-
+ 
