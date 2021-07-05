@@ -169,6 +169,14 @@ extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSourc
         return sections[section].title
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // "Artist" section
+        if indexPath.section == 1 {
+            return 90
+        }
+        return 60
+    }
+    
     // Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

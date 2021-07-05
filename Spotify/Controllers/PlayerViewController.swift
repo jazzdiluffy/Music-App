@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PlayerViewController: UIViewController {
     
     // MARK: - Properties
+    weak var dataSource: PlayerDataSource?
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
@@ -26,7 +29,9 @@ class PlayerViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(imageView)
         view.addSubview(controlsView)
+        controlsView.delegate = self
         configureBarButtons()
+        configure()
     }
     
     
@@ -52,6 +57,15 @@ class PlayerViewController: UIViewController {
     
     
     // MARK: - Methods
+    private func configure() {
+        imageView.sd_setImage(with: dataSource?.imageURL, completed: nil)
+        controlsView.configure(
+            with: PlayerControlsViewViewModel(
+                title: dataSource?.songName,
+                subtitle: dataSource?.subtitle)
+        )
+    }
+    
     private func configureBarButtons() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapAction))
@@ -65,4 +79,22 @@ class PlayerViewController: UIViewController {
     @objc private func didTapAction() {
         // Some action
     }
+}
+
+
+// MARK: - Delegate
+extension PlayerViewController: PlayerControlsViewDelegate {
+    func playerControlsViewDidTapPlayPauseButton(_ playerControlsView: PlayerControlsView) {
+        
+    }
+    
+    func playerControlsViewDidTapForwardButton(_ playerControlsView: PlayerControlsView) {
+        
+    }
+    
+    func playerControlsViewDidTapBackwardButton(_ playerControlsView: PlayerControlsView) {
+        
+    }
+    
+    
 }
