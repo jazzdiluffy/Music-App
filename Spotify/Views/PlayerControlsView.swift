@@ -11,11 +11,14 @@ protocol PlayerControlsViewDelegate: AnyObject {
     func playerControlsViewDidTapPlayPauseButton(_ playerControlsView: PlayerControlsView)
     func playerControlsViewDidTapForwardButton(_ playerControlsView: PlayerControlsView)
     func playerControlsViewDidTapBackwardButton(_ playerControlsView: PlayerControlsView)
+    func playerControlsView(_ playerControlsView: PlayerControlsView, didSlideSlider value: Float)
 }
 
 final class PlayerControlsView: UIView {
     
     // MARK: - Properties
+    private var isPlaying = true
+    
     weak var delegate: PlayerControlsViewDelegate?
     
     private let volumeSlider: UISlider = {
@@ -84,6 +87,7 @@ final class PlayerControlsView: UIView {
         addSubview(forwardButton)
         addSubview(playPauseButton)
         
+        volumeSlider.addTarget(self, action: #selector(didSlideSlider(_:)), for: .valueChanged)
         backwardButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
         forwardButton.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
         playPauseButton.addTarget(self, action: #selector(didTapPlayPause), for: .touchUpInside)
@@ -106,9 +110,25 @@ final class PlayerControlsView: UIView {
     }
     
     @objc private func didTapPlayPause() {
+        isPlaying = !isPlaying
         delegate?.playerControlsViewDidTapPlayPauseButton(self)
+        
+        // Update the icon
+        let pause = UIImage(
+            systemName: "pause.fill",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .bold)
+        )
+        let play = UIImage(
+            systemName: "play.fill",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: 34, weight: .bold)
+        )
+        playPauseButton.setImage(isPlaying ? pause : play, for: .normal)
     }
     
+    @objc private func didSlideSlider(_ slider: UISlider) {
+        let value = slider.value
+        delegate?.playerControlsView(self, didSlideSlider: value )
+    }
     
     func configure(with viewModel: PlayerControlsViewViewModel) {
         nameLabel.text = viewModel.title
