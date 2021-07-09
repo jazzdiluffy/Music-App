@@ -70,12 +70,12 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
         iconImageView.widthAnchor.constraint(equalToConstant: iconImageViewSize).isActive = true
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 5).isActive = true
+        label.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 10).isActive = true
         label.heightAnchor.constraint(equalToConstant: contentView.height / 2).isActive = true
         label.widthAnchor.constraint(equalToConstant: contentView.width - 15 - iconImageViewSize).isActive = true
         
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 5).isActive = true
+        subtitleLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 10).isActive = true
         subtitleLabel.topAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
         subtitleLabel.heightAnchor.constraint(equalToConstant: contentView.height / 2).isActive = true
         subtitleLabel.widthAnchor.constraint(equalToConstant: contentView.width - 15 - iconImageViewSize).isActive = true
