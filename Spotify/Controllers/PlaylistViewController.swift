@@ -12,6 +12,8 @@ class PlaylistViewController: UIViewController {
     // MARK: - Properties
     private let playlist: Playlist
     
+    public var isOwner = false
+    
     private var viewModels = [RecommendedTracksCellViewModel]()
     
     private var tracks = [AudioTrack]()
@@ -110,6 +112,10 @@ class PlaylistViewController: UIViewController {
             target: self,
             action: #selector(didTapShare)
         )
+        if isOwner {
+            let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
+            collectionView.addGestureRecognizer(gesture)
+        }
     }
     
     
@@ -124,6 +130,55 @@ class PlaylistViewController: UIViewController {
         )
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true, completion: nil)
+    }
+    
+    @objc private func didLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else {
+            return
+        }
+        let touchPoint = gesture.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint) else {
+            return
+        }
+        let trackToDelete = tracks[indexPath.row]
+        let actionSheet = UIAlertController(
+            title: "Remove",
+            message: "Would you like to remove this from playlist?",
+            preferredStyle: .actionSheet
+        )
+        actionSheet.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: nil
+            )
+        )
+        actionSheet.addAction(
+            UIAlertAction(
+                title: "Remove",
+                style: .destructive,
+                handler: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    APICaller.shared.removeTrackFromPlaylist(
+                        track: trackToDelete,
+                        playlist: strongSelf.playlist
+                    ) { success in
+                        DispatchQueue.main.async {
+                            if success {
+                                strongSelf.tracks.remove(at: indexPath.row)
+                                strongSelf.viewModels.remove(at: indexPath.row)
+                                strongSelf.collectionView.reloadData()
+                            } else {
+                                print("Failed to remove")
+                            }
+                        }
+                    }
+                }
+            )
+        )
+        present(actionSheet, animated: true, completion: nil)
     }
     
     
@@ -191,6 +246,4 @@ extension PlaylistViewController: PlaylistHeaderCollectionReusableViewDelegate {
         // Start playing all songs in queue order
         PlaybackPresenter.shared.startPlayback(from: self, tracks: tracks)
     }
-    
-    
 }

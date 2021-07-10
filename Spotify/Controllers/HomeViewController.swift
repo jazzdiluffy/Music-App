@@ -69,6 +69,7 @@ class HomeViewController: UIViewController {
         setupGradient(gradient: &gradient, gradientView: gradientView)
         view.addSubview(spinner)
         fetchData()
+        addLongTapGesture()
     }
     
     override func viewDidLayoutSubviews() {
@@ -213,6 +214,59 @@ class HomeViewController: UIViewController {
             )
         })))
         collectionView.reloadData()
+    }
+    
+    private func addLongTapGesture() {
+        let gesture = UILongPressGestureRecognizer(
+            target: self,
+            action: #selector(didLongPress(_:))
+        )
+        collectionView.isUserInteractionEnabled = true
+        collectionView.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func didLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else {
+            return
+        }
+        let touchPoint = gesture.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint),
+              indexPath.section == 2 else {
+            return
+        }
+        let model = tracks[indexPath.row]
+        let actionSheet = UIAlertController(
+            title: model.name,
+            message: "Would you like to add this song to a playlist?",
+            preferredStyle: .actionSheet
+        )
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(
+            UIAlertAction(
+                title: "Add to playlist",
+                style: .default,
+                handler: { [weak self] _ in
+                    DispatchQueue.main.async {
+                        let vc = LibraryPlaylistsViewController()
+                        vc.selectionHandler = { playlist in
+                            APICaller.shared.addTrackToPlaylist(
+                                track: model,
+                                playlist: playlist
+                            ) { success in
+                                print("added to playlist success \(success)")
+                            }
+                        }
+                        vc.title = "Select Playlist"                
+                        self?.present(
+                            UINavigationController(rootViewController: vc),
+                            animated: true,
+                            completion: nil
+                        )
+                    }
+                }
+            )
+        )
+        present(actionSheet, animated: true, completion: nil)
     }
 }
 

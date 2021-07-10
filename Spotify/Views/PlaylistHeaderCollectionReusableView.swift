@@ -43,6 +43,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         imageView.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
         imageView.layer.shadowRadius = 20.0
         imageView.layer.shadowOpacity = 0.9
+        imageView.tintColor = .white
         return imageView
     }()
     
@@ -85,7 +86,11 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     func configure(with viewModel: PlaylistHeaderReusableViewViewModel) {
         nameLabel.text = viewModel.name
         descriptionLabel.text = viewModel.description
-        imageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
+        imageView.sd_setImage(
+            with: viewModel.artworkURL,
+            placeholderImage: UIImage(systemName: "photo.on.rectangle.angled"),
+            completed: nil
+        )
         
         if let averageColor = imageView.image?.averageColor {
             backgroundColor = averageColor

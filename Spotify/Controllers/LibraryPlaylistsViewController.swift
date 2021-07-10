@@ -12,6 +12,8 @@ class LibraryPlaylistsViewController: UIViewController {
     // MARK: - Properties
     var playlists = [Playlist]()
     
+    public var selectionHandler: ((Playlist) -> Void)?
+    
     private let noPlaylistsView = ActionLabelView()
 
     private let tableView: UITableView = {
@@ -34,6 +36,9 @@ class LibraryPlaylistsViewController: UIViewController {
         tableView.dataSource = self
         setUpNoPlaylistsView()
         fetchData()
+        if selectionHandler != nil {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
+        }
     }
     
     
@@ -60,7 +65,6 @@ class LibraryPlaylistsViewController: UIViewController {
         } else {
             // Show table
             tableView.reloadData()
-            print("IM HERE")
             tableView.isHidden = false
             noPlaylistsView.isHidden = true
         }
@@ -108,9 +112,11 @@ class LibraryPlaylistsViewController: UIViewController {
                 return
             }
             
-            APICaller.shared.createPlaylist(with: text) { success in
+            APICaller.shared.createPlaylist(with: text) { [weak self] success in
                 if success {
                     // Refresh list of playlists
+                    self?.fetchData()
+                    self?.updateUI()
                 } else {
                     print("Failed to create a playlist")
                 }
@@ -118,6 +124,10 @@ class LibraryPlaylistsViewController: UIViewController {
             
         }))
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func didTapClose() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -131,14 +141,25 @@ extension LibraryPlaylistsViewController: ActionLabelViewDelegate {
 }
 
 extension LibraryPlaylistsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let playlist = playlists[indexPath.row]
+        guard selectionHandler == nil else {
+            selectionHandler?(playlist)
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        let vc = PlaylistViewController(playlist: playlist)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        vc.isOwner = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 
 // MARK: - Data Source
 extension LibraryPlaylistsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(playlists.count)
         return playlists.count
     }
     
