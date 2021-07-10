@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navigationController.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
             window.rootViewController = navigationController
         }
-        
         window.makeKeyAndVisible()
         self.window = window
     
