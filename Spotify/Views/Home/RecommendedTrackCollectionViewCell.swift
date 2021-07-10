@@ -23,28 +23,41 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     
     private let trackNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
-        label.numberOfLines = 1
+        label.font = .systemFont(ofSize: 17, weight: .semibold)
+        label.numberOfLines = 2
         label.textAlignment = .left
         return label
     }()
     
     private let creatorNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .thin)
+        label.font = .systemFont(ofSize: 13, weight: .thin)
         label.numberOfLines = 1
         label.textAlignment = .left
         return label
     }()
     
+    private let chevronImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "chevron.right"), highlightedImage: nil)
+        imageView.tintColor = .quaternaryLabel
+        return imageView
+    }()
+    
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .quaternaryLabel
+        return view
+    }()
     
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .secondarySystemFill
+        contentView.backgroundColor = .clear
         contentView.addSubview(trackCoverImageView)
         contentView.addSubview(trackNameLabel)
         contentView.addSubview(creatorNameLabel)
+        contentView.addSubview(chevronImageView)
+        contentView.addSubview(separatorView)
     }
     
     required init?(coder: NSCoder) {
@@ -78,19 +91,30 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     
     private func setConstraints() {
         trackCoverImageView.translatesAutoresizingMaskIntoConstraints = false
-        let imageSize = contentView.height
+        let imageSize = contentView.height - 14
         trackCoverImageView.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
         trackCoverImageView.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
-        trackCoverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        trackCoverImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
+        trackCoverImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
         
         trackNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        trackNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        trackNameLabel.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 20).isActive = true
-        trackNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 30).isActive = true
+        trackNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        trackNameLabel.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 10).isActive = true
+        trackNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 60).isActive = true
         
         creatorNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        creatorNameLabel.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 20).isActive = true
-        creatorNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 10).isActive = true
-        creatorNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 30).isActive = true
+        creatorNameLabel.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 10).isActive = true
+        creatorNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 3).isActive = true
+        creatorNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 60).isActive = true
+        
+        chevronImageView.translatesAutoresizingMaskIntoConstraints = false
+        chevronImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        chevronImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15).isActive = true
+        
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale).isActive = true
+        separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        separatorView.widthAnchor.constraint(equalToConstant: contentView.width - imageSize  - 10).isActive = true
+        separatorView.leadingAnchor.constraint(equalTo: trackCoverImageView.trailingAnchor, constant: 10).isActive = true
     }
 }

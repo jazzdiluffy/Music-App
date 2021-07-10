@@ -22,13 +22,13 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.font = .systemFont(ofSize: 23, weight: .semibold)
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .regular)
+        label.font = .systemFont(ofSize: 17, weight: .regular)
         label.numberOfLines = 4
         label.minimumScaleFactor = 0.9
         label.adjustsFontSizeToFitWidth = true
@@ -44,6 +44,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         imageView.layer.shadowRadius = 20.0
         imageView.layer.shadowOpacity = 0.9
         imageView.tintColor = .white
+        
         return imageView
     }()
     
@@ -66,6 +67,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+        roundCorners(corners: [.bottomLeft, .bottomRight], radius: 15)
         addSubview(imageView)
         addSubview(nameLabel)
         addSubview(descriptionLabel)

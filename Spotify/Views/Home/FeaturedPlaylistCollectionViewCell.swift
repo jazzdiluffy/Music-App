@@ -23,20 +23,20 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     
     private let playlistNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.minimumScaleFactor = 0.7
+        label.minimumScaleFactor = 0.9
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private let creatorNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .thin)
+        label.font = .systemFont(ofSize: 13, weight: .regular)
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.minimumScaleFactor = 0.5
+        label.minimumScaleFactor = 0.9
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -45,7 +45,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .secondarySystemFill
+        contentView.backgroundColor = .clear
         contentView.addSubview(playlistCoverImageView)
         contentView.addSubview(playlistNameLabel)
         contentView.addSubview(creatorNameLabel)
@@ -84,16 +84,16 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     private func setConstraints() {
         playlistCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         playlistCoverImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        let imageSize = contentView.width - 50
+        let imageSize = contentView.width - 40
         playlistCoverImageView.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
         playlistCoverImageView.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
-        playlistCoverImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        playlistCoverImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         
         playlistNameLabel.translatesAutoresizingMaskIntoConstraints = false
         playlistNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        playlistNameLabel.topAnchor.constraint(equalTo: playlistCoverImageView.bottomAnchor, constant: 3).isActive = true
+        playlistNameLabel.topAnchor.constraint(equalTo: playlistCoverImageView.bottomAnchor, constant: 2).isActive = true
         playlistNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - 20).isActive = true
-        playlistNameLabel.heightAnchor.constraint(equalToConstant: contentView.height - imageSize - 10 - 10 - 8).isActive = true
+        playlistNameLabel.heightAnchor.constraint(equalToConstant: contentView.height - imageSize - 10 - 10 - 2).isActive = true
         
         creatorNameLabel.translatesAutoresizingMaskIntoConstraints = false
         creatorNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true

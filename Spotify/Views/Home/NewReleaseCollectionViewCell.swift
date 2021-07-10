@@ -24,23 +24,23 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     
     private let albumNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
         label.numberOfLines = 2
-        label.minimumScaleFactor = 0.7
+        label.minimumScaleFactor = 0.9
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private let numberOfTracksLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .light)
+        label.font = .systemFont(ofSize: 15, weight: .regular)
         label.numberOfLines = 1
         return label
     }()
     
     private let artistNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .regular)
+        label.font = .systemFont(ofSize: 17, weight: .regular)
         label.numberOfLines = 1
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
@@ -51,7 +51,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .secondarySystemFill
+        contentView.backgroundColor = .clear
         contentView.addSubview(albumCoverImageView)
         contentView.addSubview(albumNameLabel)
         contentView.addSubview(artistNameLabel)
@@ -101,16 +101,16 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         albumNameLabel.translatesAutoresizingMaskIntoConstraints = false
         albumNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
         albumNameLabel.leftAnchor.constraint(equalTo: albumCoverImageView.rightAnchor, constant: 10).isActive = true
-        albumNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 20).isActive = true
+        albumNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 60).isActive = true
         
         artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
         artistNameLabel.leftAnchor.constraint(equalTo: albumCoverImageView.rightAnchor, constant: 10).isActive = true
-        artistNameLabel.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 5).isActive = true
-        artistNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 20).isActive = true
+        artistNameLabel.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 2).isActive = true
+        artistNameLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 60).isActive = true
         
         numberOfTracksLabel.translatesAutoresizingMaskIntoConstraints = false
         numberOfTracksLabel.leftAnchor.constraint(equalTo: albumCoverImageView.rightAnchor, constant: 10).isActive = true
-        numberOfTracksLabel.topAnchor.constraint(equalTo: artistNameLabel.bottomAnchor, constant: 5).isActive = true
-        numberOfTracksLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 20).isActive = true
+        numberOfTracksLabel.topAnchor.constraint(equalTo: artistNameLabel.bottomAnchor, constant: 2).isActive = true
+        numberOfTracksLabel.widthAnchor.constraint(equalToConstant: contentView.width - imageSize - 60).isActive = true
     }
 }

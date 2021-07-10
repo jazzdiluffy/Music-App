@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.isHidden = true
+        tableView.separatorColor = .clear
         return tableView
     }()
 
@@ -72,7 +73,7 @@ class ProfileViewController: UIViewController {
             return
         }
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width / 1.5))
-        let imageSize: CGFloat = headerView.height / 2
+        let imageSize: CGFloat = headerView.height / 1.2
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
         headerView.addSubview(imageView)
         imageView.center = headerView.center
@@ -106,7 +107,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.selectionStyle = .none
         cell.textLabel?.text = models[indexPath.row]
+        cell.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     

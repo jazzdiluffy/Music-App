@@ -21,13 +21,13 @@ final class AlbumHeaderCollectionReusableView: UICollectionReusableView {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 30, weight: .bold)
+        label.font = .systemFont(ofSize: 23, weight: .semibold)
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .regular)
+        label.font = .systemFont(ofSize: 17, weight: .regular)
         label.numberOfLines = 4
         label.minimumScaleFactor = 0.9
         label.adjustsFontSizeToFitWidth = true
@@ -100,6 +100,7 @@ final class AlbumHeaderCollectionReusableView: UICollectionReusableView {
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
+        roundCorners(corners: [.bottomRight, .bottomLeft], radius: 15)
         let imageSize: CGFloat = width / 1.3
         imageView.frame = CGRect(
             x: (width - imageSize) / 2,

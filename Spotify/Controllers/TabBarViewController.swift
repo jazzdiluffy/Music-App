@@ -58,8 +58,8 @@ class TabBarViewController: UITabBarController {
         tabBar.tintColor = .label
         tabBar.layer.masksToBounds = true
         tabBar.layer.cornerRadius = 15
-        tabBar.layer.borderWidth = 0.5
-        tabBar.layer.borderColor = UIColor.secondaryLabel.cgColor
+        tabBar.layer.borderWidth = 0.2
+        tabBar.layer.borderColor = UIColor.quaternaryLabel.cgColor
         
         
         nav1.navigationBar.prefersLargeTitles = true

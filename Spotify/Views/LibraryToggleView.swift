@@ -97,13 +97,13 @@ class LibraryToggleView: UIView {
         playlistButton.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         playlistButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         playlistButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        playlistButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        playlistButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
             
         albumsButton.translatesAutoresizingMaskIntoConstraints = false
         albumsButton.leftAnchor.constraint(equalTo: playlistButton.rightAnchor).isActive = true
         albumsButton.centerYAnchor.constraint(equalTo: playlistButton.centerYAnchor).isActive = true
         albumsButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        albumsButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        albumsButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
         indicatorView.widthAnchor.constraint(equalToConstant: 80).isActive = true

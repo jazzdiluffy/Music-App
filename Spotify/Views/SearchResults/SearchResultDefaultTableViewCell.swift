@@ -15,6 +15,7 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
     
     private let label: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 17, weight: .semibold) 
         label.numberOfLines = 1
         return label
     }()
@@ -25,12 +26,19 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .quaternaryLabel
+        return view
+    }()
+    
     
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
         contentView.addSubview(iconImageView)
+        contentView.addSubview(separatorView)
         contentView.clipsToBounds = true
         accessoryType = .disclosureIndicator
     }
@@ -43,7 +51,6 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         iconImageView.layer.cornerRadius = (contentView.height - 10) / 2
         iconImageView.layer.masksToBounds = true
         setConstrainsts()
@@ -64,9 +71,15 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
         iconImageView.widthAnchor.constraint(equalToConstant: iconImageViewSize).isActive = true
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 5).isActive = true
+        label.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 8).isActive = true
         label.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor).isActive = true
         label.widthAnchor.constraint(equalToConstant: contentView.width - 15 - iconImageViewSize).isActive = true
+        
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale).isActive = true
+        separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        separatorView.widthAnchor.constraint(equalToConstant: contentView.width - iconImageViewSize  - 10).isActive = true
+        separatorView.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10).isActive = true
     }
     
     // MARK: - Methods

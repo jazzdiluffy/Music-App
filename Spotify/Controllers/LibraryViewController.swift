@@ -97,7 +97,7 @@ class LibraryViewController: UIViewController {
         toggleView.heightAnchor.constraint(equalToConstant: 55).isActive = true
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 65).isActive = true
         scrollView.widthAnchor.constraint(equalToConstant: view.width).isActive = true
         scrollView.heightAnchor.constraint(equalToConstant: view.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom - 55).isActive = true
     }
