@@ -1,5 +1,5 @@
 # 🟢 Music-App 🎵
-<img src="https://imgur.com/3USzAbs" align="center">
+<img src="https://imgur.com/v6aFO9t.png" align="center">
 
 
 
