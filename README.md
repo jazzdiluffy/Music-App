@@ -7,9 +7,9 @@
 
 
 <p align="center">
-  <img src="art/home.gif" height="600">
+  <img src="art/home.gif" width="375" height="812">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="art/player.gif" height="600">
+  <img src="art/player.gif" width="375" height="812">
 &nbsp; &nbsp; &nbsp; &nbsp;
 </p>
 
@@ -25,9 +25,9 @@
 - Listening music by categories
 
 <p align="center">
-  <img src="https://imgur.com/uKZvlX8.png" height="600">
+  <img src="https://imgur.com/uKZvlX8.png" width="375" height="812">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="art/search.gif" height="600">
+  <img src="art/search.gif" width="375" height="812">
 &nbsp; &nbsp; &nbsp; &nbsp;
 </p>
 
